@@ -1,17 +1,13 @@
 import {Element} from '../node_modules/@polymer/polymer/polymer-element.js';
-import '../node_modules/@polymer/paper-styles/typography.js';
-import '../node_modules/@polymer/paper-styles/color.js';
-import "../node_modules/@polymer/polymer/lib/elements/dom-repeat.js";
-import "../node_modules/@polymer/paper-item/paper-item.js";
 import "../node_modules/@polymer/app-route/app-location.js";
 import "../node_modules/@polymer/app-route/app-route.js";
 import "../node_modules/@polymer/app-layout/app-header/app-header.js";
 import "../node_modules/@polymer/app-layout/app-toolbar/app-toolbar.js";
 import "../node_modules/@polymer/iron-pages/iron-pages.js";
 import "../node_modules/@polymer/paper-progress/paper-progress.js";
-import "../../node_modules/@polymer/iron-flex-layout/iron-flex-layout.js";
 import "./elements/my-heroes-list.js";
 import "./elements/my-heroes-detail.js";
+import './styles/my-shared-styles.js';
 
 const html = (template) => template.toString();
 

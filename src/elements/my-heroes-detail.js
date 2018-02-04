@@ -1,12 +1,10 @@
 import {Element} from '../../node_modules/@polymer/polymer/polymer-element.js';
 import "../../node_modules/@polymer/app-route/app-location.js";
 import "../../node_modules/@polymer/app-route/app-route.js";
-import '../../node_modules/@polymer/paper-styles/color.js';
-import '../../node_modules/@polymer/paper-styles/typography.js';
 import "../../node_modules/@polymer/iron-icons/iron-icons.js";
 import "../../node_modules/@polymer/iron-image/iron-image.js";
 import "../../node_modules/@polymer/paper-card/paper-card.js";
-import "../../node_modules/@polymer/iron-flex-layout/iron-flex-layout.js";
+import '../styles/my-shared-styles.js';
 
 const html = (template) => template.toString();
 
@@ -16,36 +14,43 @@ export class MyHeroesDetail extends Element {
         <style>
            iron-icon {
                color: #757575;
+               transition: .5s ease;
            }
 
            iron-icon:hover {
                color: var(--paper-blue-500);
            }
 
+           card-details,
            detail-container {
+               @apply --layout-flex-auto;
                @apply --layout-vertical;
            }
+
+           card-details {
+                padding: 2rem;
+           }
+
            paper-card {
                @apply --layout-horizontal;
            }
+
            .card-image {
                background-color: #eee;
                width: 206px;
                height: 300px;
            }
-           .card-details {
-                padding: 2rem;
-                @apply --layout-flex-auto;
-                @apply --layout-vertical;
-           }
+
            hero-group {
                padding: 0 4rem;
            }
+
            header-container {
                @apply --layout-horizontal;
                @apply --layout-center;
                margin-bottom: 2rem;
            }
+
            header-container > h3 {
             margin: 0 0 0 2rem;
            }
@@ -58,16 +63,18 @@ export class MyHeroesDetail extends Element {
         </app-route>
         <detail-container>
             <paper-card>
-                <div class="card-details">
+                <card-details>
                     <header-container>
                         <a href="/">
                             <iron-icon icon="arrow-back"></iron-icon>
                         </a>
                         <h3>[[hero.PrimaryName]]</h3>
                     </header-container>  
-                    <hero-group>[[hero.Group]]</hero-group>
-                    <hero-group>[[hero.SubGroup]]</hero-group>
-                </div>
+                    <hero-group>
+                        <div>[[hero.Group]]</div>
+                        <div>[[hero.SubGroup]]</div>
+                    </hero-group>
+                </card-details>
                 <iron-image sizing="contain" src="[[hero.ImageURL]]" class="card-image">
                 </iron-image>
             </paper-card>
