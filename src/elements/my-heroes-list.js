@@ -1,8 +1,9 @@
 import {Element} from '../../node_modules/@polymer/polymer/polymer-element.js';
-import "../../node_modules/@polymer/polymer/lib/elements/dom-repeat.js";
-import "../../node_modules/@polymer/app-route/app-location.js";
-import "../../node_modules/@polymer/app-route/app-route.js";
-import "../../node_modules/@polymer/iron-pages/iron-pages.js";
+import '../../node_modules/@polymer/polymer/lib/elements/dom-repeat.js';
+import '../../node_modules/@polymer/app-route/app-location.js';
+import '../../node_modules/@polymer/app-route/app-route.js';
+import '../../node_modules/@polymer/iron-pages/iron-pages.js';
+import '../../node_modules/@polymer/paper-item/paper-item.js';
 import '../styles/my-shared-styles.js';
 
 const html = (template) => template.toString();
@@ -12,11 +13,10 @@ export class MyHeroesList extends Element {
         return html `
         <style>
             hero-item {
-                display: flex;
-                padding: 0.5rem 0;
+                @apply --layout-flex-auto;
             }
             hero-item a {
-                color: #757575;
+                color: var(--paper-grey-600);
                 text-decoration: none;
                 transition: .5s ease;
             }
@@ -28,7 +28,9 @@ export class MyHeroesList extends Element {
             <template>
                 <hero-item>
                     <a href="/hero/[[item.PrimaryName]]">
+                        <paper-item>
                             [[item.PrimaryName]]
+                        </paper-item>
                     </a>
                 </hero-item>
             </template>

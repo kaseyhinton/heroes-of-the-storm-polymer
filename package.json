@@ -15,6 +15,7 @@
     "@polymer/paper-button": "next",
     "@polymer/paper-card": "next",
     "@polymer/paper-fab": "next",
+    "@polymer/paper-icon-button": "next",
     "@polymer/paper-item": "next",
     "@polymer/paper-progress": "next",
     "@polymer/paper-styles": "next",

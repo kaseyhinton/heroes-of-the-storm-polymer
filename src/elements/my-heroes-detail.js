@@ -1,9 +1,10 @@
 import {Element} from '../../node_modules/@polymer/polymer/polymer-element.js';
-import "../../node_modules/@polymer/app-route/app-location.js";
-import "../../node_modules/@polymer/app-route/app-route.js";
-import "../../node_modules/@polymer/iron-icons/iron-icons.js";
-import "../../node_modules/@polymer/iron-image/iron-image.js";
-import "../../node_modules/@polymer/paper-card/paper-card.js";
+import '../../node_modules/@polymer/app-route/app-location.js';
+import '../../node_modules/@polymer/app-route/app-route.js';
+import '../../node_modules/@polymer/iron-icons/iron-icons.js';
+import '../../node_modules/@polymer/iron-image/iron-image.js';
+import '../../node_modules/@polymer/paper-card/paper-card.js';
+import '../../node_modules/@polymer/paper-icon-button/paper-icon-button.js';
 import '../styles/my-shared-styles.js';
 
 const html = (template) => template.toString();
@@ -13,7 +14,7 @@ export class MyHeroesDetail extends Element {
         return html `
         <style>
            iron-icon {
-               color: #757575;
+               color: var(--paper-grey-600);
                transition: .5s ease;
            }
 
@@ -36,13 +37,13 @@ export class MyHeroesDetail extends Element {
            }
 
            .card-image {
-               background-color: #eee;
+               background-color: var(--paper-grey-200);
                width: 206px;
                height: 300px;
            }
 
            hero-group {
-               padding: 0 4rem;
+               padding: 0 6rem;
            }
 
            header-container {
@@ -53,6 +54,9 @@ export class MyHeroesDetail extends Element {
 
            header-container > h3 {
             margin: 0 0 0 2rem;
+           }
+           header-container > a {
+               color: var(--paper-grey-600);
            }
         </style>
         <app-location route="{{route}}"></app-location>
@@ -66,7 +70,7 @@ export class MyHeroesDetail extends Element {
                 <card-details>
                     <header-container>
                         <a href="/">
-                            <iron-icon icon="arrow-back"></iron-icon>
+                            <paper-icon-button icon="arrow-back"></paper-icon-button>
                         </a>
                         <h3>[[hero.PrimaryName]]</h3>
                     </header-container>  
@@ -75,7 +79,7 @@ export class MyHeroesDetail extends Element {
                         <div>[[hero.SubGroup]]</div>
                     </hero-group>
                 </card-details>
-                <iron-image sizing="contain" src="[[hero.ImageURL]]" class="card-image">
+                <iron-image sizing="cover" src="[[hero.ImageURL]]" class="card-image">
                 </iron-image>
             </paper-card>
         </detail-container>
@@ -87,7 +91,6 @@ export class MyHeroesDetail extends Element {
     }
 
     _routePageChanged(heroName) {
-        console.log(heroName);
         if (!heroName) 
             return;
         this.heroName = heroName;
