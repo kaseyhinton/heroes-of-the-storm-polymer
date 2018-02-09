@@ -12,8 +12,8 @@ import './styles/my-shared-styles.js';
 const html = (template) => template.toString();
 
 export class MyApp extends Element {
-    static get template() {
-        return html `
+  static get template() {
+    return html `
         <style>
             app-container {
                 @apply --layout-vertical;
@@ -53,37 +53,28 @@ export class MyApp extends Element {
             </iron-pages>
         </app-container>
     `;
-    }
+  }
 
-    static get properties() {
-        return {
-            page: {
-                type: String,
-                reflectToAttribute: true,
-                observer: '_pageChanged'
-            },
-            isLoading: {
-                type: Boolean,
-                value: false
-            }
-        }
-    }
+  constructor() {
+    super();
+    this.isLoading = false;
+  }
 
-    _pageChanged(page) {
-        // Lazy Import Later
-    }
-
-    static get observers() {
-        return [
-          '_routePageChanged(routeData.page)',
-        ];
+  static get properties() {
+    return {
+      page: {type: String, reflectToAttribute: true}, isLoading: {
+        type: Boolean
       }
+    }
+  }
 
-      _routePageChanged(page) {
-        // If no page was found in the route data, page will be an empty string.
-        // Default to 'view1' in that case.
-        this.page = page || 'heroes-list';
-      }
+  static get observers() {
+    return [
+      '_routePageChanged(routeData.page)',
+    ];
+  }
+
+  _routePageChanged(page) { this.page = page || 'heroes-list'; }
 }
 
 customElements.define('my-app', MyApp);

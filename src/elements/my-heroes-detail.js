@@ -10,8 +10,8 @@ import '../styles/my-shared-styles.js';
 const html = (template) => template.toString();
 
 export class MyHeroesDetail extends Element {
-    static get template() {
-        return html `
+  static get template() {
+    return html `
         <style>
            iron-icon {
                color: var(--paper-grey-600);
@@ -84,43 +84,36 @@ export class MyHeroesDetail extends Element {
             </paper-card>
         </detail-container>
         `;
+  }
+
+  constructor() {
+    super();
+    this.hero = {};
+  }
+
+  static get properties() {
+    return {
+      hero: {type: Object}, heroName: {type: String}, isLoading: {
+        type: Boolean, notify: true
+      }
     }
+  }
 
-    static get observers() {
-        return ['_routePageChanged(routeData.hero)'];
-    }
+  static get observers() { return ['_routePageChanged(routeData.hero)']; }
 
-    _routePageChanged(heroName) {
-        if (!heroName) 
-            return;
-        this.heroName = heroName;
-        this.query(heroName);
-    }
+  _routePageChanged(heroName) {
+    if (!heroName) return;
+    this.heroName = heroName;
+    this.query(heroName);
+  }
 
-    static get properties() {
-        return {
-            hero: {
-                type: Object,
-                value: {}
-            },
-            heroName: {
-                type: String
-            },
-            isLoading: {
-                type: Boolean,
-                notify: true
-            }
-        }
-    }
+  query(heroName) {
+    this.isLoading = true;
 
-    query(heroName) {
-        this.isLoading = true;
+    const variables =
+    { PrimaryName: heroName }
 
-        const variables = {
-            PrimaryName: heroName
-        }
-
-        const query = `
+    const query = `
         query getHero($PrimaryName: String!) {
             hero(PrimaryName: $PrimaryName) {
               PrimaryName
@@ -131,23 +124,19 @@ export class MyHeroesDetail extends Element {
           }
       `
 
-        fetch('http://207.246.117.229/heroes-of-the-storm/graphql', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-                body: JSON.stringify({query, variables})
-            })
-            .then(res => res.json())
-            .then(res => {
-                let data = res.data;
-                console.log(res.data.hero);
-                this.hero = res.data.hero;
-                // let heroes = Object     .keys(data)     .map(key => data[key]) this.heroes =
-                // heroes;
-                this.isLoading = false;
-            });
-    }
+                  fetch('http://207.246.117.229/heroes-of-the-storm/graphql',
+                        {
+                          method: 'POST',
+                          headers: {'Content-Type': 'application/json'},
+                          body: JSON.stringify({query, variables})
+                        })
+                      .then(res => res.json())
+                      .then(res => {
+                        let data = res.data;
+                        this.hero = res.data.hero;
+                        this.isLoading = false;
+                      });
+  }
 }
 
 customElements.define('my-heroes-detail', MyHeroesDetail);
